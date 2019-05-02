@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 3800964949788596057}
   - component: {fileID: 800133159572353882}
   - component: {fileID: 4922174834538623713}
+  - component: {fileID: 5803995312226319016}
   m_Layer: 0
   m_Name: Unit
-  m_TagString: Untagged
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,3 +106,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6648d9438f9c3bb4f80f5e8059a19af9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
+  god: {fileID: 2703988446791266164, guid: 6d3b1e06db9f4744a9943ab774445f32, type: 3}
+  enegy: 0
+  rb: {fileID: 0}
+  isActive: 0
+--- !u!54 &5803995312226319016
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244075910089762629}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
