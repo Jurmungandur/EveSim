@@ -11,6 +11,7 @@ public class UnitBehavour : MonoBehaviour
     private float rotateBy = 0;
     private float t = 0.0f;
     public bool isActive = false;
+    public int CurrentFood = 0;
 
     public void Awake()
     {
@@ -45,5 +46,25 @@ public class UnitBehavour : MonoBehaviour
         transform.LookAt(new Vector3(0, 1, 0));
         enegy = 300;
         isActive = true;
+    }
+
+    private void OnTriggerEnter(Collider col2)
+    {
+        if (col2.gameObject.tag == "Food")
+        {
+            CurrentFood += 1;
+            Destroy(col2.gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "Wall")
+        {
+            if (CurrentFood >= 1) {
+                isActive = false;
+                rb.velocity = new Vector3(0, 0, 0);
+            }
+        }
     }
 }

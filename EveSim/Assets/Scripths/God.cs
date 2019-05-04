@@ -14,13 +14,14 @@ public class God : MonoBehaviour
     public GameObject[] unitsInGame;
     private int FoodToday;
     private int randomNumber = 0;
-    public int activeUnits;
+    public int activeUnits = 0;
     private bool settingUpDay = false;
+    public bool day = false;
+    private float t = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        activeUnits = 1;
         for (int i = 0; i < UnitCount; i++)
         {
             randomNumber = Random.Range(1, 5);
@@ -48,17 +49,31 @@ public class God : MonoBehaviour
                 newUnit.GetComponent<UnitBehavour>().speed = 1;
                 newUnit.GetComponent<UnitBehavour>().enegy = 200;
             }
-            NewDay(DayNr);
             settingUpDay = true;
+            NewDay(DayNr);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        t = t + Time.deltaTime;
+        if (t > 1)
+        {
+            foreach (GameObject Unit in unitsInGame)
+            {
+                if (Unit.GetComponent<UnitBehavour>().isActive == true)
+                {
+                    day = true;
+                }
+                else {
+                    day = false;
+                }
+            }
+            t = 0;
+        }
         unitsInGame = GameObject.FindGameObjectsWithTag("Unit");
-        activeUnits = unitsInGame.Length;
-        if (activeUnits <= 0) {
+        if (day == false) {
             if(settingUpDay == false)
             {
                 NewDay(DayNr);
@@ -68,7 +83,8 @@ public class God : MonoBehaviour
     }
 
     void NewDay(int CurrentDay) {
-
+        day = true;
+        activeUnits = unitsInGame.Length + 1;
         float totalspeedtoday = 0;
         float avragespeedtoday = 0;
         SpawnFood();
@@ -92,7 +108,7 @@ public class God : MonoBehaviour
         FoodToday = FoodPerDay + Random.Range(-FoodChange, FoodChange);
         for (int y = 0; y < FoodToday; y++)
         {
-            Instantiate(Food, new Vector3(Random.Range(-sizeOfMap, sizeOfMap), 0.5f, Random.Range(-sizeOfMap, sizeOfMap)), transform.rotation);
+            Instantiate(Food, new Vector3(Random.Range(-sizeOfMap+1, sizeOfMap-1), 0.5f, Random.Range(-sizeOfMap+1, sizeOfMap-1)), transform.rotation);
         }
     }
 }
